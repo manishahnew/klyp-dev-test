@@ -11,7 +11,7 @@ Text Domain: klyp
 */
 
 class KlypTest {
-    const PLUGIN_VERSION = '1.0.0';
+    const PLUGIN_VERSION = '1.0.1';
 
     function __construct() {
         // Shortcode.
@@ -42,28 +42,28 @@ class KlypTest {
                     The premise is simple, create a simple website that will be able to perform a search using the Search API for movies containing any of the following words: red, green, blue or yellow.
                 </p>
 
-                <div class="klyp-developer-test__results red">
+                <div class="klyp-developer-test__results red" data-colour="red">
                     <h2>
                         Red movies
                     </h2>
                     <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="50" height="50"> 
                 </div>
 
-                <div class="klyp-developer-test__results green">
+                <div class="klyp-developer-test__results green" data-colour="green">
                     <h2>
                         Green movies
                     </h2>
                     <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="50" height="50">    
                 </div>
 
-                <div class="klyp-developer-test__results blue">
+                <div class="klyp-developer-test__results blue" data-colour="blue">
                     <h2>
                         Blue movies
                     </h2>
                     <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="50" height="50">
                 </div>
 
-                <div class="klyp-developer-test__results yellow">
+                <div class="klyp-developer-test__results yellow" data-colour="yellow">
                     <h2>
                         Yellow movies
                     </h2>
@@ -89,9 +89,32 @@ class KlypTest {
 
     // Process ajax requests.
     public function fetch_movies(){
+        $curl = curl_init();
+
+        $api_key = '6604a562';
+        $colour = $_POST['colour'];
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "http://www.omdbapi.com/?s={$colour}&apikey={$api_key}",
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_RETURNTRANSFER => true
+        ]);
+
+        $response = curl_exec($curl);
         
+        curl_close($curl);
+
+        // 3rd paramater (expiration date) is not required but we will set it to 12 hours so we can store the data for 12 hours and then refresh to get the latest data.
+        $klyp_movies_data_transient = set_transient( 'klyp_movies_data', json_encode($response), 12 * HOUR_IN_SECONDS );
+
+        if ( $klyp_movies_data_transient === false ) {
+            echo json_encode($response);
+        } else {
+            echo get_transient( 'klyp_movies_data' );
+        }
+
+        wp_die();
     }
-    // Store data in transients.
     // Add Gulp. 
 }
 
