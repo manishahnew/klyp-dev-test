@@ -1,5 +1,9 @@
+import Swiper from 'swiper';
+
 jQuery(function($) {
     "use strict";
+
+    console.log(Swiper);
 
     var results_divs = $('.klyp-developer-test__results');
 
@@ -8,6 +12,7 @@ jQuery(function($) {
         var colour = $(this).data('colour');
         var loading = true;
         var loadingImage = $(this).find('.loading-image');
+        var currentDiv = $(this);
         
         $.ajax({
             method: 'POST',
@@ -33,6 +38,26 @@ jQuery(function($) {
                 // Check if movie title begins with one of our colours.
                 if (movie.Title.toLowerCase().startsWith(colour)){
                     console.log(movie);
+
+                    var moviesHtml = `
+                    <div class="klyp-developer-test__results__col">
+                        <img src="${movie.Poster}" title="${movie.Title}" width="300" height="445" />
+
+                        <h3>
+                            ${movie.Title}
+                        </h3>
+                        
+                        <p>
+                            ${movie.Year}
+                        </p>
+
+                        <a href="https://www.imdb.com/title/${movie.imdbID}" target="_blank">
+                            IMDB Page
+                        </a>
+                    </div>
+                    `;
+
+                    currentDiv.append(moviesHtml)
                 }
             })
         })

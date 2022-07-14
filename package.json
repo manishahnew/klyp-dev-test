@@ -1,0 +1,33 @@
+{
+  "name": "klyp",
+  "version": "1.0.0",
+  "description": "Klyp developer test",
+  "main": "gulpfile.babel.js",
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/register": "^7.18.6",
+    "babel-loader": "^8.2.5",
+    "del": "^6.1.1",
+    "gulp": "^4.0.2",
+    "gulp-imagemin": "^8.0.0",
+    "gulp-sass": "^5.1.0",
+    "node-sass": "^7.0.1",
+    "sass": "^1.53.0",
+    "vinyl-named": "^1.1.0",
+    "webpack-stream": "^7.0.0"
+  },
+  "scripts": {
+    "build": "gulp build --prod"
+  },
+  "babel": {
+    "presets": [
+      "@babel/env"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "swiper": "^8.3.1"
+  }
+}

@@ -46,28 +46,28 @@ class KlypTest {
                     <h2>
                         Red movies
                     </h2>
-                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="50" height="50"> 
+                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/src/assets/images/loading.gif" alt="Loading" width="50" height="50"> 
                 </div>
 
                 <div class="klyp-developer-test__results green" data-colour="green">
                     <h2>
                         Green movies
                     </h2>
-                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="50" height="50">    
+                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/src/assets/images/loading.gif" alt="Loading" width="50" height="50">    
                 </div>
 
                 <div class="klyp-developer-test__results blue" data-colour="blue">
                     <h2>
                         Blue movies
                     </h2>
-                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="50" height="50">
+                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/src/assets/images/loading.gif" alt="Loading" width="50" height="50">
                 </div>
 
                 <div class="klyp-developer-test__results yellow" data-colour="yellow">
                     <h2>
                         Yellow movies
                     </h2>
-                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="50" height="50">
+                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/src/assets/images/loading.gif" alt="Loading" width="50" height="50">
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@ class KlypTest {
         // Styles
 
         // Scripts
-        wp_register_script( 'front-end-scripts', plugin_dir_url( __FILE__ ) . '/dist/js/front-end-scripts.js', [ 'jquery' ], self::PLUGIN_VERSION, true );
+        wp_register_script( 'front-end-scripts', plugin_dir_url( __FILE__ ) . '/dist/assets/js/scripts.js', [ 'jquery' ], self::PLUGIN_VERSION, true );
         wp_localize_script( 'front-end-scripts', 'klyp_ajax', [ 'admin_url' => admin_url( 'admin-ajax.php' )]);        
     }
 
