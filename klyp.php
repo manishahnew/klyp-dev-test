@@ -14,15 +14,21 @@ class KlypTest {
     const PLUGIN_VERSION = '1.0.0';
 
     function __construct() {
+        // Shortcode.
         add_shortcode( 'klyptest', [ $this, 'shortcode' ] );
 
+        // Scripts.
         add_action( 'wp_enqueue_scripts', [ $this, 'scripts_styles' ] );
+
+        // Ajax functions.
+        add_action( 'wp_ajax_fetch_movies', [ $this, 'fetch_movies' ] );
+        add_action( 'wp_ajax_nopriv_fetch_movies' , [ $this, 'fetch_movies' ]);
     }
 
     // Main shortcode.
     public function shortcode() {
         wp_enqueue_script( 'front-end-scripts' );
-        
+
         ob_start();
         ?>
     
@@ -82,6 +88,9 @@ class KlypTest {
     }
 
     // Process ajax requests.
+    public function fetch_movies(){
+        
+    }
     // Store data in transients.
     // Add Gulp. 
 }
