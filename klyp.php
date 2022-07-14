@@ -104,13 +104,12 @@ class KlypTest {
         
         curl_close($curl);
 
-        // 3rd paramater (expiration date) is not required but we will set it to 12 hours so we can store the data for 12 hours and then refresh to get the latest data.
-        $klyp_movies_data_transient = set_transient( 'klyp_movies_data', json_encode($response), 12 * HOUR_IN_SECONDS );
-
-        if ( $klyp_movies_data_transient === false ) {
+        if ( get_transient( "klyp_movies_data_{$colour}" ) === false ) {
+            // 3rd paramater (expiration date) is not required but we will set it to 12 hours so we can store the data for 12 hours and then refresh to get the latest data.
             echo json_encode($response);
+            set_transient( "klyp_movies_data_{$colour}", json_encode($response), 12 * HOUR_IN_SECONDS );
         } else {
-            echo get_transient( 'klyp_movies_data' );
+            echo get_transient( "klyp_movies_data_{$colour}" );
         }
 
         wp_die();
