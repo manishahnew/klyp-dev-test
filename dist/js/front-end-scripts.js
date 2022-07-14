@@ -1,3 +1,5 @@
 jQuery(function($) {
-    console.log( "ready!" );
+    "use strict";
+
+    
 });

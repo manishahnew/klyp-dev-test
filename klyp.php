@@ -21,13 +21,45 @@ class KlypTest {
 
     // Main shortcode.
     public function shortcode() {
-        wp_enqueue_style( 'bootstrap' );
         wp_enqueue_script( 'front-end-scripts' );
         
         ob_start();
         ?>
-        
+    
+        <div class="klyp-developer-test">
+            <div class="klyp-developer-test__container">
+                <h2>
+                    Klyp - Developer Test
+                </h2>
 
+                <p>
+                    The premise is simple, create a simple website that will be able to perform a search using the Search API for movies containing any of the following words: red, green, blue or yellow.
+                </p>
+                
+                <div class="klyp-developer-test__buttons">
+                    <button type="button" data-colour="red">
+                        Red movies
+                    </button>
+
+                    <button type="button" data-colour="green">
+                        Green movies
+                    </button>
+
+                    <button type="button" data-colour="blue">
+                        Blue movies
+                    </button>
+
+                    <button type="button" data-colour="yellow">
+                        Yellow movies
+                    </button>
+                </div>
+
+                <div class="klyp-developer-test__results">
+                    <img src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="75" height="75">
+                </div>
+            </div>
+        </div>
+    
         <?php
         $shortcode_html = ob_get_clean();
 
