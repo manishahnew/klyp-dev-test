@@ -11,7 +11,7 @@ Text Domain: klyp
 */
 
 class KlypTest {
-    const PLUGIN_VERSION = '1.0.001';
+    const PLUGIN_VERSION = '1.0.0';
 
     function __construct() {
         // Shortcode.
