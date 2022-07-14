@@ -1,5 +1,119 @@
-html {
-    body {
-        background-color: red;
+// As this is a plugin, we don't want to rely too much on 3rd party scripts. That's why I didn't use Bootstrap so our hypotheic users can style the HTML elements, fonts etc the way they want.
+
+.klyp-developer-test {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.klyp-developer-test a {
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.klyp-developer-test img {
+    max-width: 100%;
+    height: auto;
+}
+
+.klyp-developer-test {
+
+    h1,
+    h2,
+    h3 {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.klyp-developer-test__results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.klyp-developer-test__results__col {
+    padding-bottom: 2rem;
+    width: calc(100% - 1rem);
+}
+
+@media (min-width: 768px) {
+    .klyp-developer-test__results__col {
+        padding-bottom: 2rem;
+        width: calc(50% - 1rem);
+    }
+}
+
+.klyp-developer-test__results__title {
+    width: 100%;
+}
+
+.klyp-developer-test__results.red h2 {
+    color: red;
+}
+
+.klyp-developer-test__results.green h2 {
+    color: green;
+}
+
+.klyp-developer-test__results.blue h2 {
+    color: blue;
+}
+
+.klyp-developer-test__results.yellow h2 {
+    color: rgb(189, 189, 12);
+}
+
+.klyp-developer-test__results__link {
+    color: #f3ce13;
+
+    &:hover {
+        color: #000;
+    }
+}
+
+.klyp-developer-test__results__poster img {
+    display: block;
+}
+
+.klyp-developer-test__results {
+    .klyp-developer-test__results__poster {
+        display: inline-block;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transition: all 0.3s ease-in-out;
+            opacity: .25;
+        }
+    }
+
+    &.red .klyp-developer-test__results__poster:hover {
+        &::after {
+            background-color: red;
+        }
+    }
+
+    &.green .klyp-developer-test__results__poster:hover {
+        &::after {
+            background-color: green;
+        }
+    }
+
+    &.blue .klyp-developer-test__results__poster:hover {
+        &::after {
+            background-color: blue;
+        }
+    }
+
+    &.yellow .klyp-developer-test__results__poster:hover {
+        &::after {
+            background-color: rgb(189, 189, 12);
+        }
     }
 }

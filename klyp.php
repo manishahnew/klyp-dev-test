@@ -11,7 +11,7 @@ Text Domain: klyp
 */
 
 class KlypTest {
-    const PLUGIN_VERSION = '1.0.1';
+    const PLUGIN_VERSION = '1.0.001';
 
     function __construct() {
         // Shortcode.
@@ -20,21 +20,21 @@ class KlypTest {
         // Scripts.
         add_action( 'wp_enqueue_scripts', [ $this, 'scripts_styles' ] );
 
-        // Ajax functions.
-        add_action( 'wp_ajax_fetch_movies', [ $this, 'fetch_movies' ] );
-        add_action( 'wp_ajax_nopriv_fetch_movies' , [ $this, 'fetch_movies' ]);
+        // Ajax functions for fetching each colour.
+        add_action( 'wp_ajax_fetch_movies_per_colour', [ $this, 'fetch_movies_per_colour' ] );
+        add_action( 'wp_ajax_nopriv_fetch_movies_per_colour' , [ $this, 'fetch_movies_per_colour' ]);
     }
 
     // Main shortcode.
     public function shortcode() {
-        wp_enqueue_script( 'front-end-scripts' );
-
+        wp_enqueue_script( 'klyp-scripts' );
+        wp_enqueue_style( 'klyp-styles' );
         ob_start();
         ?>
     
         <div class="klyp-developer-test">
             <div class="klyp-developer-test__container">
-                <h2>
+                <h1>
                     Klyp - Developer Test
                 </h2>
 
@@ -43,30 +43,34 @@ class KlypTest {
                 </p>
 
                 <div class="klyp-developer-test__results red" data-colour="red">
-                    <h2>
+                    <h2 class="klyp-developer-test__results__title">
                         Red movies
                     </h2>
+
                     <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/src/assets/images/loading.gif" alt="Loading" width="50" height="50"> 
                 </div>
 
                 <div class="klyp-developer-test__results green" data-colour="green">
-                    <h2>
+                    <h2 class="klyp-developer-test__results__title">
                         Green movies
                     </h2>
+
                     <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/src/assets/images/loading.gif" alt="Loading" width="50" height="50">    
                 </div>
 
                 <div class="klyp-developer-test__results blue" data-colour="blue">
-                    <h2>
+                    <h2 class="klyp-developer-test__results__title">
                         Blue movies
                     </h2>
+
                     <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/src/assets/images/loading.gif" alt="Loading" width="50" height="50">
                 </div>
 
                 <div class="klyp-developer-test__results yellow" data-colour="yellow">
-                    <h2>
+                    <h2 class="klyp-developer-test__results__title">
                         Yellow movies
                     </h2>
+
                     <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/src/assets/images/loading.gif" alt="Loading" width="50" height="50">
                 </div>
             </div>
@@ -81,14 +85,15 @@ class KlypTest {
     // Plugin scripts and styles.
     public function scripts_styles() {
         // Styles
+        wp_register_style( 'klyp-styles',  plugin_dir_url( __FILE__ ) . '/dist/assets/css/style.css', [], self::PLUGIN_VERSION );
 
         // Scripts
-        wp_register_script( 'front-end-scripts', plugin_dir_url( __FILE__ ) . '/dist/assets/js/scripts.js', [ 'jquery' ], self::PLUGIN_VERSION, true );
-        wp_localize_script( 'front-end-scripts', 'klyp_ajax', [ 'admin_url' => admin_url( 'admin-ajax.php' )]);        
+        wp_register_script( 'klyp-scripts', plugin_dir_url( __FILE__ ) . '/dist/assets/js/scripts.js', [ 'jquery' ], self::PLUGIN_VERSION, true );
+        wp_localize_script( 'klyp-scripts', 'klyp_ajax', [ 'admin_url' => admin_url( 'admin-ajax.php' )]);        
     }
 
-    // Process ajax requests.
-    public function fetch_movies(){
+    // Fetch movies per each colour.
+    public function fetch_movies_per_colour(){
         $curl = curl_init();
 
         $api_key = '6604a562';
@@ -104,8 +109,12 @@ class KlypTest {
         
         curl_close($curl);
 
-        if ( get_transient( "klyp_movies_data_{$colour}" ) === false ) {
-            // 3rd paramater (expiration date) is not required but we will set it to 12 hours so we can store the data for 12 hours and then refresh to get the latest data.
+        /* 
+        ** We will store the movies in the database to cache them and load them faster but only for 12 hours so we can always fetch the latest movies after 12 hours. 
+        ** We could also store them in a custom table or the options table but it would mean we wouldn't have access to the latest data which is why 
+        ** I chose to go with transients.
+        */
+        if ( get_transient( "klyp_movies_data_{$colour}" ) === false ) { 
             echo json_encode($response);
             set_transient( "klyp_movies_data_{$colour}", json_encode($response), 12 * HOUR_IN_SECONDS );
         } else {
@@ -114,7 +123,11 @@ class KlypTest {
 
         wp_die();
     }
-    // Add Gulp. 
+    
+    // Fetch all movies that start with our colours. 
+    public function fetch_all_movies () {
+
+    }
 }
 
 new KlypTest();

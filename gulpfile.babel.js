@@ -2,7 +2,7 @@ import gulp from 'gulp';
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
 const sass = gulpSass( dartSass );
-// import imagemin from 'gulp-imagemin';
+import cleanCSS from 'gulp-clean-css';
 import webpack from 'webpack-stream';
 import named from 'vinyl-named';
 import del from 'del';
@@ -21,6 +21,7 @@ const paths = {
 export const styles = (done) => {
     return gulp.src(paths.styles.src)
         .pipe(sass().on('error', sass.logError))
+        .pipe(cleanCSS({compatibility:'ie8'}))
         .pipe(gulp.dest(paths.styles.dest))
 }
 

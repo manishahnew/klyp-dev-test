@@ -10,6 +10,7 @@
     "babel-loader": "^8.2.5",
     "del": "^6.1.1",
     "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
     "gulp-imagemin": "^8.0.0",
     "gulp-sass": "^5.1.0",
     "node-sass": "^7.0.1",

@@ -1,10 +1,7 @@
-import Swiper from 'swiper';
-
 jQuery(function($) {
     "use strict";
 
-    console.log(Swiper);
-
+    // Fetch and display movies for each colour.
     var results_divs = $('.klyp-developer-test__results');
 
     results_divs.each(function(){
@@ -19,7 +16,7 @@ jQuery(function($) {
             url: klyp_ajax.admin_url,
             dataType: 'json',
             data: {
-                action: 'fetch_movies',
+                action: 'fetch_movies_per_colour',
                 colour: colour
             }
         })
@@ -37,21 +34,21 @@ jQuery(function($) {
             movies.forEach(function(movie){
                 // Check if movie title begins with one of our colours.
                 if (movie.Title.toLowerCase().startsWith(colour)){
-                    console.log(movie);
-
                     var moviesHtml = `
                     <div class="klyp-developer-test__results__col">
-                        <img src="${movie.Poster}" title="${movie.Title}" width="300" height="445" />
+                        <a class="klyp-developer-test__results__poster" href="https://www.imdb.com/title/${movie.imdbID}" target="_blank">
+                            <img src="${movie.Poster}" title="${movie.Title}" width="300" height="445" />
+                        </a>
 
                         <h3>
                             ${movie.Title}
                         </h3>
                         
                         <p>
-                            ${movie.Year}
+                            Year: ${movie.Year}
                         </p>
 
-                        <a href="https://www.imdb.com/title/${movie.imdbID}" target="_blank">
+                        <a class="klyp-developer-test__results__link" href="https://www.imdb.com/title/${movie.imdbID}" target="_blank">
                             IMDB Page
                         </a>
                     </div>
@@ -62,7 +59,8 @@ jQuery(function($) {
             })
         })
         .fail(function(error){
-            console.error(error)
+            console.error(error);
+            alert('Something has gone wrong.');
         })
         .always(function(){
             // Set loading to false and remove the loading gif.
