@@ -123,11 +123,6 @@ class KlypTest {
 
         wp_die();
     }
-    
-    // Fetch all movies that start with our colours. 
-    public function fetch_all_movies () {
-
-    }
 }
 
 new KlypTest();
