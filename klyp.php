@@ -21,12 +21,12 @@ class KlypTest {
 
     // Main shortcode.
     public function shortcode() {
+        wp_enqueue_style( 'bootstrap' );
         wp_enqueue_script( 'front-end-scripts' );
         
         ob_start();
         ?>
         
-        <div id="app">{{ message }}</div>
 
         <?php
         $shortcode_html = ob_get_clean();
@@ -36,13 +36,15 @@ class KlypTest {
 
     // Plugin scripts and styles.
     public function scripts_styles() {
-        wp_register_script( 'vue', 'https://unpkg.com/vue@3', [], self::PLUGIN_VERSION, true );
+        // Styles
 
-        wp_register_script( 'front-end-scripts', plugin_dir_url( __FILE__ ) . '/dist/js/front-end-scripts.js', [ 'vue' ], self::PLUGIN_VERSION, true );
+        // Scripts
+        wp_register_script( 'front-end-scripts', plugin_dir_url( __FILE__ ) . '/dist/js/front-end-scripts.js', [ 'jquery' ], self::PLUGIN_VERSION, true );
     }
 
     // Process ajax requests.
     // Store data in transients.
+    // Add Gulp. 
 }
 
 new KlypTest();
