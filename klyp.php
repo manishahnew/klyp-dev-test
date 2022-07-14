@@ -40,28 +40,28 @@ class KlypTest {
                     <h2>
                         Red movies
                     </h2>
-                    <img src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="75" height="75">    
+                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="50" height="50"> 
                 </div>
 
                 <div class="klyp-developer-test__results green">
                     <h2>
                         Green movies
                     </h2>
-                    <img src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="75" height="75">    
+                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="50" height="50">    
                 </div>
 
                 <div class="klyp-developer-test__results blue">
                     <h2>
                         Blue movies
                     </h2>
-                    <img src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="75" height="75">
+                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="50" height="50">
                 </div>
 
                 <div class="klyp-developer-test__results yellow">
                     <h2>
                         Yellow movies
                     </h2>
-                    <img src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="75" height="75">
+                    <img class="loading-image" src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="50" height="50">
                 </div>
             </div>
         </div>
