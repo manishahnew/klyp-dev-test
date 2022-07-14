@@ -4,6 +4,7 @@ jQuery(function($) {
     var results_divs = $('.klyp-developer-test__results');
 
     results_divs.each(function(){
+        // Variables
         var colour = $(this).data('colour');
         var loading = true;
         var loadingImage = $(this).find('.loading-image');
@@ -18,10 +19,11 @@ jQuery(function($) {
             }
         })
         .done(function(response){
+            // Parse JSON so we can work with it more easily in JS.
             var response = JSON.parse(response)
 
             // Stop if no movies found. 
-            if (response.totalResults == 0){
+            if (response.totalResults === 0){
                 return        
             } 
 
@@ -38,8 +40,11 @@ jQuery(function($) {
             console.error(error)
         })
         .always(function(){
+            // Set loading to false and remove the loading gif.
             loading = false;
             if (loading === false) loadingImage.hide();
+
+            // Just so we know the request has been finished. 
             console.log('Request completed.')
         })
     })
