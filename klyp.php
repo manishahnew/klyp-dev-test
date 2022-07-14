@@ -35,26 +35,32 @@ class KlypTest {
                 <p>
                     The premise is simple, create a simple website that will be able to perform a search using the Search API for movies containing any of the following words: red, green, blue or yellow.
                 </p>
-                
-                <div class="klyp-developer-test__buttons">
-                    <button type="button" data-colour="red">
+
+                <div class="klyp-developer-test__results red">
+                    <h2>
                         Red movies
-                    </button>
-
-                    <button type="button" data-colour="green">
-                        Green movies
-                    </button>
-
-                    <button type="button" data-colour="blue">
-                        Blue movies
-                    </button>
-
-                    <button type="button" data-colour="yellow">
-                        Yellow movies
-                    </button>
+                    </h2>
+                    <img src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="75" height="75">    
                 </div>
 
-                <div class="klyp-developer-test__results">
+                <div class="klyp-developer-test__results green">
+                    <h2>
+                        Green movies
+                    </h2>
+                    <img src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="75" height="75">    
+                </div>
+
+                <div class="klyp-developer-test__results blue">
+                    <h2>
+                        Blue movies
+                    </h2>
+                    <img src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="75" height="75">
+                </div>
+
+                <div class="klyp-developer-test__results yellow">
+                    <h2>
+                        Yellow movies
+                    </h2>
                     <img src="<?php echo plugin_dir_url( __FILE__ ); ?>/dist/img/loading.gif" alt="Loading" width="75" height="75">
                 </div>
             </div>
@@ -72,6 +78,7 @@ class KlypTest {
 
         // Scripts
         wp_register_script( 'front-end-scripts', plugin_dir_url( __FILE__ ) . '/dist/js/front-end-scripts.js', [ 'jquery' ], self::PLUGIN_VERSION, true );
+        wp_localize_script( 'front-end-scripts', 'klyp_ajax', [ 'admin_url' => admin_url( 'admin-ajax.php' )]);        
     }
 
     // Process ajax requests.
